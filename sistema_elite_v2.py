@@ -3,18 +3,17 @@
 ====================================================================================================
 SISTEMA ELITE DE TRACKING TÁCTICO FÚTBOL - VERSIÓN FINAL CERTIFICADA
 ====================================================================================================
-🏆 TODAS LAS CORRECCIONES FINALES APLICADAS:
-✅ detect_formation añadido a config
-✅ IoU real implementado (40% dist + 30% reid + 30% iou)
-✅ cost_threshold usado correctamente
-✅ CSV con celdas vacías en lugar de "None"
-✅ Flush final del ensemble si no alcanza cupo completo
-✅ self.events eliminado (no usado)
-✅ Banner correcto v2.0.1
+ TODAS LAS CORRECCIONES FINALES APLICADAS:
+ detect_formation añadido a config
+ IoU real implementado (40% dist + 30% reid + 30% iou)
+ cost_threshold usado correctamente
+ CSV con celdas vacías en lugar de "None"
+ Flush final del ensemble si no alcanza cupo completo
+ self.events eliminado (no usado)
+ Banner correcto v2.0.1
 
 VERSIÓN: 2.0.1-CERTIFIED
 FECHA: 2025
-GARANTÍA: 100% funcional, cero bugs conocidos, certificado para producción
 ====================================================================================================
 """
 
@@ -158,9 +157,9 @@ class EliteConfig:
 CONFIG = EliteConfig()
 
 print("=" * 100)
-print("🏆 SISTEMA ELITE v2.0.1 - VERSIÓN FINAL")
+print(" SISTEMA ELITE v2.0.1 - VERSIÓN FINAL")
 print("=" * 100)
-print(f"\n⚙️  Modo: {CONFIG.mode.value.upper()}")
+print(f"\n  Modo: {CONFIG.mode.value.upper()}")
 print(f"   Device: {CONFIG.device.upper()}")
 print(f"   ReID: {'✅' if CONFIG.use_reid else '❌'}")
 print(f"   Homografía: {'✅' if CONFIG.use_homography else '❌'}")
@@ -303,7 +302,7 @@ class SharedFeatureExtractor:
             ])
             
             self.initialized = True
-            print("✅ Feature extractor compartido inicializado")
+            print(" Feature extractor compartido inicializado")
     
     def extract(self, crop: np.ndarray) -> Optional[np.ndarray]:
         if crop.size == 0:
@@ -343,9 +342,9 @@ class AutoFieldCalibrator:
                 raise ValueError("Homografía no calculable")
             
             self.calibrated = True
-            print("✅ Calibración manual exitosa")
+            print(" Calibración manual exitosa")
         except Exception as e:
-            print(f"❌ Error en calibración manual: {e}")
+            print(f" Error en calibración manual: {e}")
             self.calibrated = False
     
     def create_field_mask(self, frame_shape: Tuple) -> np.ndarray:
@@ -545,7 +544,7 @@ class EnsembleTeamClassifier:
         if config.use_deep_classifier and TORCH_AVAILABLE:
             self.classifiers.append(DeepClassifier(config, feature_extractor))
         
-        print(f"✅ Ensemble: {len(self.classifiers)} clasificadores")
+        print(f" Ensemble: {len(self.classifiers)} clasificadores")
     
     def classify(self, frame: np.ndarray, detection: Detection) -> bool:
         votes = []
@@ -832,7 +831,7 @@ class EliteTrackingSystem:
         # Historial
         self.tactical_snapshots: List[TacticalSnapshot] = []
 
-        print("\n✅ Sistema Elite v2.0.1 inicializado")
+        print("\n Sistema Elite v2.0.1 inicializado")
 
     # ----------------------------------------------------------------------------------------
     # Ciclo principal
@@ -939,25 +938,25 @@ class EliteTrackingSystem:
                 if hasattr(clf, 'train'):
                     clf.train(self._bootstrap_crops)
             self._ensemble_trained = True
-            print(f"✅ Ensemble entrenado con {len(self._bootstrap_crops)} muestras (flush final)")
+            print(f" Ensemble entrenado con {len(self._bootstrap_crops)} muestras (flush final)")
 
         # 8) Export
         self._export_results(fps)
 
-        print("\n✅ Completado")
+        print("\n Completado")
 
     # ----------------------------------------------------------------------------------------
     # Calibración
     # ----------------------------------------------------------------------------------------
     def _calibrate(self):
-        print("\n🎯 Calibrando...")
+        print("\n Calibrando...")
         if self.config.auto_calibrate:
-            print("⚠️  Auto-calibración experimental - usando manual por defecto")
+            print("  Auto-calibración experimental - usando manual por defecto")
 
         if self.config.manual_points and len(self.config.manual_points) == 4:
             self.calibrator.calibrate_manual(self.config.manual_points)
         else:
-            print("⚠️  Sin puntos de calibración - continuando sin homografía")
+            print("  Sin puntos de calibración - continuando sin homografía")
             self.config.use_homography = False
 
     # ----------------------------------------------------------------------------------------
@@ -1021,7 +1020,7 @@ class EliteTrackingSystem:
                     if hasattr(clf, 'train'):
                         clf.train(self._bootstrap_crops)
                 self._ensemble_trained = True
-                print("✅ Ensemble entrenado online")
+                print(" Ensemble entrenado online")
 
     # ----------------------------------------------------------------------------------------
     # Tracking (IoU + Distancia + ReID) con Hungarian
@@ -1288,25 +1287,25 @@ def main():
         system.cleanup()
         
         print("\n" + "=" * 100)
-        print("🏆 SISTEMA ELITE v2.0.1-CERTIFIED COMPLETADO")
+        print(" SISTEMA ELITE v2.0.1-CERTIFIED COMPLETADO")
         print("=" * 100)
-        print("\n📁 Resultados:")
+        print("\n Resultados:")
         print("   - results/elite/tracking_v2.mp4")
         print("   - results/elite/tactical_v2.mp4")
         print("   - results/elite/data/tracking_v2.json")
         print("   - results/elite/data/tracks.csv")
         print("   - results/elite/data/events.csv")
-        print("\n🎯 Garantía: Cero bugs conocidos | Certificado para producción")
         print("=" * 100)
         
     except KeyboardInterrupt:
-        print("\n⚠️  Interrumpido")
+        print("\n  Interrumpido")
         system.cleanup()
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n Error: {e}")
         import traceback
         traceback.print_exc()
         system.cleanup()
 
 if __name__ == "__main__":
     main()
+
