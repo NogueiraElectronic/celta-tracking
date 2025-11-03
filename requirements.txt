@@ -1,0 +1,23 @@
+# SISTEMA ELITE DE TRACKING TÁCTICO FÚTBOL v2.0.1
+# Dependencias principales - VERSIÓN GPU NVIDIA
+
+# Visión por computadora y detección
+opencv-python==4.8.1.78
+ultralytics==8.1.0
+
+# Computación numérica y científica
+numpy==1.24.3
+scipy==1.11.4
+
+# Machine Learning
+scikit-learn==1.3.2
+
+# Visualización
+matplotlib==3.8.2
+
+# Utilidades
+tqdm==4.66.1
+
+# NOTA IMPORTANTE:
+# PyTorch con CUDA se instala con un comando separado (ver instrucciones abajo)
+# NO incluir torch/torchvision aquí para evitar instalar la versión CPU
