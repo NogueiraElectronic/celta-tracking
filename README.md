@@ -761,6 +761,6 @@ The ELITE Football Tracking System was developed to democratize access to profes
 
 **Developed with passion for the beautiful game**
 
-*Last Updated: January 2025 • Version 2.0.1-CERTIFIED • Production Ready*
+*Last Updated: January 2025 • Version 2.0.1-CERTIFIED • 
 
 </div>
